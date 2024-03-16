@@ -10,7 +10,7 @@ public class RotateLeft {
         return arr;
 
     }
-    static int[] rotateArrayk(int[] arr, int n, int k){
+    static int[] rotateArrayk(int[] arr, int n, int k){//SC:O(n)TC:O(n)
         int res[]=new int[n];
         int ind = 0;
         for(int i=k;i<n;i++){
@@ -21,10 +21,26 @@ public class RotateLeft {
         }
         return res;
     }
+    static void reverse(int[] arr, int low, int high){
+        while(low<high){
+            int temp = arr[low];
+            arr[low] = arr[high];
+            arr[high] = temp;
+            low++;high--;
+        }
+    }
+    static int[] rotateArraykOptimal (int[] arr, int n, int k){ //SC:O(1) TC:O(2n)
+        reverse(arr, 0, k-1);
+        reverse(arr, k, n-1);
+        reverse(arr, 0, n-1);
+        return arr;
+    }
     public static void main(String[] args) {
         int res[] = rotateArray1(new int[]{1,2,3,4,5}, 5);
         System.out.println(java.util.Arrays.toString(res));
         res = rotateArrayk(new int[]{1,2,3,4,5}, 5, 3);
+        System.out.println(java.util.Arrays.toString(res));
+        res = rotateArraykOptimal(new int[]{1,2,3,4,5,6,7}, 7, 3);
         System.out.println(java.util.Arrays.toString(res));
     }
 }

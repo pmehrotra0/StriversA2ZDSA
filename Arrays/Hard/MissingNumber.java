@@ -21,6 +21,49 @@ public class MissingNumber {
         }
         return res;
     }
+    public static int[] findMissingRepeatingNumbersXor(int []a) {
+        int n = a.length;
+        int xor = 0;
+        for(int i=0;i<n;i++){
+            xor = xor ^ a[i];
+            xor = xor ^ (i+1);
+        }
+        int bitNo = 0;
+        while(true){
+            if((xor & (1<<bitNo)) != 0){
+                break;
+            }
+            bitNo++;
+        }
+        int v1=0;
+        int v2=0;
+        for(int i=0;i<n;i++){
+            if((a[i] & (1<<bitNo)) == 0 ){
+                v1 = v1 ^ a[i];
+            }
+            else{
+                v2 = v2 ^ a[i];
+            }
+
+            if(((i+1) & (1<<bitNo)) == 0 ){
+                v1 = v1 ^ (i+1);
+            }
+            else{
+                v2 = v2 ^ (i+1);
+            }
+        }
+        System.out.println(v1+" "+v2);
+        int x = 0;
+        for(int i=0;i<n;i++){
+            if(a[i] == v1){
+                x=v1;
+                break;
+            }
+        }
+        x = x == 0? v2 : v1;
+        int y = x == v1 ? v2: v1;
+        return new int[]{x, y};
+    }
     
     public static int[] findMissingRepeatingNumbersMath(int []a) {
         long s = 0;
@@ -41,7 +84,7 @@ public class MissingNumber {
     }
     
     public static void main(String[] args) {
-        int res[] = findMissingRepeatingNumbersMath(new int[]{4,3,6,2,1,1 });
+        int res[] = findMissingRepeatingNumbersXor(new int[]{4,3,6,2,1,1 });
         System.out.println(java.util.Arrays.toString(res));
     }
 }

@@ -23,7 +23,7 @@ public class MissingNumber {
     }
     
     public static int[] findMissingRepeatingNumbersMath(int []a) {
-        long long s = 0;
+        long s = 0;
         long s2 = 0;
         int n = a.length;
         for(int i=0;i<n;i++){

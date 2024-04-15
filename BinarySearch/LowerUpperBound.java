@@ -81,5 +81,6 @@ public class LowerUpperBound {
         System.out.println(lowerBound(new int[]{2,3,6,7,8,8,11,11,11,12}, 10, 11));
         System.out.println(upperBound(new int[]{2,3,6,7,8,8,11,11,11,12}, 10, 11));
         System.out.println(searchInsert(new int[]{2,3,6,7,8,8,11,11,11,12}, 11));
+        System.out.println(getFloorAndCeil(new int[]{2,3,6,7,8,8,11,11,11,12}, 10, 11));
     }
 }

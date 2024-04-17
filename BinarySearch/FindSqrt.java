@@ -1,4 +1,4 @@
-
+/* https://www.naukri.com/code360/problems/nth-root-of-m_1062679 */
 public class FindSqrt {
     public static int sqrtN(long N) {
 		int low=0, high=(int)(N-1);

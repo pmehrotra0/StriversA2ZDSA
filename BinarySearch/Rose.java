@@ -2,15 +2,17 @@
 public class Rose {
     public static int roseGarden(int[] arr, int r, int b) {
         int max=Integer.MIN_VALUE;
+        int min=Integer.MAX_VALUE;
         int n = arr.length;
         for(int i=0;i<n;i++){
             max = max < arr[i] ? arr[i] : max;
+            min = min > arr[i] ? arr[i] : min;
         }
         System.out.println("max" +max);
-        int low=1, high=max; int ans = Integer.MAX_VALUE;
+        int low=min, high=max; int ans = Integer.MAX_VALUE;
         while(low<=high){
             int mid = (low+high)/2;
-            int noOfB = calcB(arr, r, mid);
+            int noOfB = calcBOpt(arr, r, mid);
             if(noOfB >= b){
                 ans = ans > mid ? mid : ans;
                 high = mid-1;
@@ -47,6 +49,21 @@ public class Rose {
             }
         }
         return cnt;
+    }
+    public static int calcBOpt(int arr[], int r, int day){
+        int noOfB = 0, cnt=0;
+        int n = arr.length;
+        for(int i=0;i<n;i++){
+            if(arr[i] <= day){
+                cnt++;
+            }
+            else{
+                noOfB += (cnt/r);
+                cnt = 0;
+            }
+        }
+        noOfB += (cnt/r);
+        return noOfB;
     }
     public static void main(String[] args) {
         System.out.println(roseGarden(new int[]{1, 2, 1, 2, 7, 2, 2, 3, 1}, 3, 2));
